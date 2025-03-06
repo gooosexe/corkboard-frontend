@@ -27,7 +27,7 @@ const PostList: React.FC = () => {
   useEffect(() => {
     // Fetch posts from the server
     axios
-      .get<PostData[]>(`${API_URL}/posts`)
+      .get<PostData[]>(`${API_URL}`)
       .then((res) => {
         // Reverse the posts array to display in reverse order
         setPosts(res.data.reverse())
