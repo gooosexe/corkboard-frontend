@@ -1,0 +1,52 @@
+
+#root {
+  margin: 0 auto;
+  padding: 0;
+  text-align: left;
+}
+
+body {
+  margin: auto;
+}
+
+.posts-container {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin: 10px;
+  gap: 10px;
+  width: auto;
+}
+
+.posts-container-grid_column{
+  padding-left: 30px; /* gutter size offset */
+  background-clip: padding-box;
+}
+
+.header {
+  padding: 10px 10px 10px 10px;
+  margin: 0px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  display: flex;
+  background-color: var(--secondary);
+}
+
+/* Style the scrollbar container */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--chart-2);
+}
