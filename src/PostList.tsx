@@ -11,6 +11,8 @@ interface PostData {
   content: string
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const PostList: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([])
 	const breakpointColumnsObj = {
@@ -25,7 +27,7 @@ const PostList: React.FC = () => {
   useEffect(() => {
     // Fetch posts from the server
     axios
-      .get<PostData[]>("http://100.70.92.238:8080/api/posts")
+      .get<PostData[]>(`${API_URL}/posts`)
       .then((res) => {
         // Reverse the posts array to display in reverse order
         setPosts(res.data.reverse())

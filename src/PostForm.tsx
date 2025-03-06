@@ -53,7 +53,7 @@ export function PostForm() {
     
     try {
       // sent POST request to the server
-      const response = await axios.post("http://localhost:8080/api/posts", formData, {
+      const response = await axios.post(`${process.env.API_URL}/posts`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 			console.log(response);
