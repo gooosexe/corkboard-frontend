@@ -53,7 +53,7 @@ export function PostForm() {
     
     try {
       // sent POST request to the server
-      const response = await axios.post(`${process.env.API_URL}`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 			console.log(response);
