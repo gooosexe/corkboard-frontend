@@ -46,7 +46,9 @@ const PostList: React.FC = () => {
         <Post
           key={post.id}
           author={post.username || "anonymous"}
-          date={DateTime.fromISO(post.createdAt).toRelative() || "just now"}
+          date={
+            DateTime.fromISO(post.createdAt).setZone(DateTime.now().zoneName).toRelative({ base: DateTime.now() }) || "just now"
+          }
           content={post.content}
           postNumber={post.id}
         />
