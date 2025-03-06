@@ -25,7 +25,7 @@ const maxUsername = 20;
 const formSchema = z.object({
   username: z.string().max(maxUsername, {
     message: "keep it short and sweet.",
-  }),
+  }).optional(),
 	content: z.string().min(1, {
 		message: "no point in saying nothing.",
 	}).max(maxCharacters, {
@@ -43,7 +43,7 @@ export function PostForm() {
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
-    if (values.username.length == 0) {
+    if (!values.username) {
       values.username = "anonymous";
     }
     formData.append("username", values.username);
