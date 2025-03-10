@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Input } from "./components/ui/input"
 import { Textarea } from "./components/ui/textarea"
 
 const maxCharacters = 500;
@@ -31,6 +31,7 @@ const formSchema = z.object({
 	}).max(maxCharacters, {
     message: "keep it short and sweet.",
   }),
+  image: z.instanceof(File).optional(),
 })
 
 export function PostForm() {
@@ -40,7 +41,6 @@ export function PostForm() {
     resolver: zodResolver(formSchema),
   })
  
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
     if (!values.username) {
@@ -48,8 +48,9 @@ export function PostForm() {
     }
     formData.append("username", values.username);
     formData.append("content", values.content);
-    
-    // if (image) formData.append("image", image);
+    if (values.image) {
+      formData.append("image", values.image);
+    }
     
     try {
       // sent POST request to the server
@@ -116,6 +117,23 @@ export function PostForm() {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field: { onChange } }) => (
+            <FormItem>
+              <FormLabel>an image (optional).</FormLabel>
+              <FormControl>
+                <Input 
+                  type="file" 
+                  accept="image/*"  
+                  onChange={(e) => onChange(e.target.files?.[0])}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
