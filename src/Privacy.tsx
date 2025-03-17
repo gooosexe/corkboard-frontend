@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Privacy() {
   return (
     <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
