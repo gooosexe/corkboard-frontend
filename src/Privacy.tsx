@@ -3,10 +3,10 @@ export default function Privacy() {
     <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
       <h1>Privacy Policy</h1>
       <p>
-        <strong>Effective Date:</strong> [Insert Date]
+        <strong>Effective Date:</strong> March 16, 2025
       </p>
       <p>
-        <strong>Last Updated:</strong> [Insert Date]
+        <strong>Last Updated:</strong> March 16, 2025
       </p>
 
       <h2>1. Information We Collect</h2>
@@ -31,7 +31,7 @@ export default function Privacy() {
       <h2>3. Data Retention</h2>
       <p>
         We store IP addresses <strong>temporarily</strong> and automatically
-        delete them after [X days].
+        delete them after 30 days.
       </p>
 
       <h2>4. Data Sharing</h2>
@@ -47,7 +47,7 @@ export default function Privacy() {
       <p>
         Depending on your location, you may have rights regarding your data
         (e.g., GDPR, CCPA). Contact us at{" "}
-        <a href="mailto:[your email]">[your email]</a> for requests.
+        <a href="mailto:corkboard-admin@gmail.com">corkboard-admin[at]gmail[dot]com</a> for requests.
       </p>
 
       <h2>6. Security</h2>
@@ -62,7 +62,7 @@ export default function Privacy() {
       <h2>8. Contact Us</h2>
       <p>
         If you have questions, contact us at{" "}
-        <a href="mailto:[your email]">[your email]</a>.
+        <a href="mailto:corkboard-admin@gmail.com">corkboard-admin[at]gmail[dot]com</a>.
       </p>
     </div>
   );

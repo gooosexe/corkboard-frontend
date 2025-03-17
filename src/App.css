@@ -9,6 +9,10 @@ body {
   margin: auto;
 }
 
+a:hover {
+  color: var(--secondary);
+}
+
 .posts-container {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
