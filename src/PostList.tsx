@@ -3,13 +3,7 @@ import axios from "axios"
 import { DateTime } from "luxon"
 import Post from "./Post" // Assuming the Post component is already created
 import Masonry from "react-masonry-css"
-
-interface PostData {
-  id: number
-  username: string
-  createdAt: string
-  content: string
-}
+import { PostData } from "./types/postdata"
 
 const API_URL = import.meta.env.VITE_API_URL;
 

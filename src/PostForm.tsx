@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "./components/ui/input"
 import { Textarea } from "./components/ui/textarea"
+import { Header } from "./components/header";
 
 const maxCharacters = 500;
 const maxUsername = 20;
@@ -26,6 +27,9 @@ const formSchema = z.object({
   username: z.string().max(maxUsername, {
     message: "keep it short and sweet.",
   }).optional(),
+  title: z.string().min(1, {
+    message: "no point in saying nothing.",
+  }),
 	content: z.string().min(1, {
 		message: "no point in saying nothing.",
 	}).max(maxCharacters, {
@@ -67,76 +71,92 @@ export function PostForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-16 max-w-2xl mx-auto">
+    <>
+      <Header/>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-16 max-w-2xl mx-auto">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>title</FormLabel>
+                <FormControl>
+                  <Input placeholder="the title of your post." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>username</FormLabel>
+                <FormControl>
+                  <Input placeholder="your username. leave blank for anonymous." className="placeholder:text-muted-foreground" {...field} 
+                    onChange={(e) => {
+                      if (e.target.value.length <= maxUsername) {
+                        field.onChange(e);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <div className="text-right text-sm text-muted-foreground">
+                  {(field.value ?? "").length} / {20}
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>username</FormLabel>
-              <FormControl>
-                <Input placeholder="your username. leave blank for anonymous." className="placeholder:text-muted-foreground" {...field} 
-                  onChange={(e) => {
-                    if (e.target.value.length <= maxUsername) {
-                      field.onChange(e);
-                    }
-                  }}
-                />
-              </FormControl>
-              <div className="text-right text-sm text-muted-foreground">
-                {(field.value ?? "").length} / {20}
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>content</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder="the content of your post. play nice." className="placeholder:text-muted-foreground"{...field} 
+                    onChange={(e) => {
+                      if (e.target.value.length <= maxCharacters) {
+                        field.onChange(e);
+                      }
+                    }}
+                  />
+                </FormControl>
+                <div className="text-right text-sm text-muted-foreground">
+                  {(field.value ?? "").length} / {500}
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>content</FormLabel>
-              <FormControl>
-                <Textarea 
-                  placeholder="the content of your post. play nice." className="placeholder:text-muted-foreground"{...field} 
-                  onChange={(e) => {
-                    if (e.target.value.length <= maxCharacters) {
-                      field.onChange(e);
-                    }
-                  }}
-                />
-              </FormControl>
-              <div className="text-right text-sm text-muted-foreground">
-                {(field.value ?? "").length} / {500}
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="image"
-          render={({ field: { onChange } }) => (
-            <FormItem>
-              <FormLabel>an image (optional).</FormLabel>
-              <FormControl>
-                <Input 
-                  type="file" 
-                  accept="image/*"  
-                  onChange={(e) => onChange(e.target.files?.[0])}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field: { onChange } }) => (
+              <FormItem>
+                <FormLabel>an image (optional).</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="file" 
+                    accept="image/*"  
+                    onChange={(e) => onChange(e.target.files?.[0])}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </>
   )
 }
 
